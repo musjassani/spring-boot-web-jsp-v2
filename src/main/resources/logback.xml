@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="project.name" value="spring-boot-web-jsp"/>
+    <contextName>${project.name}</contextName>
+
+    <jmxConfigurator/>
+
+    <appender name="${project.name}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/${project.name}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.home}/logs/${project.name}/${project.name}.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- keep 30 files in history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 20MB -->
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %p %t %c - %m%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="springframework" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/${project.name}/springframework.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.home}/logs/${project.name}/springframework.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- keep 30 files in history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 20MB -->
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %p %t %c - %m%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="hibernate" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/${project.name}/hibernate.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.home}/logs/${project.name}/hibernate.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- keep 30 files in history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 20MB -->
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %p %t %c - %m%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder
+            by default -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %p %t %c - %m%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.proto" level="WARN" additivity="false">
+        <appender-ref ref="${project.name}"/>
+    </logger>
+
+    <logger name="org.springframework" level="WARN" additivity="false">
+        <appender-ref ref="springframework"/>
+    </logger>
+
+    <logger name="Hibernate" level="WARN" additivity="false">
+        <appender-ref ref="hibernate"/>
+    </logger>
+
+    <root level="WARN">
+        <appender-ref ref="${project.name}"/>
+    </root>
+
+</configuration>
